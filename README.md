@@ -192,6 +192,59 @@ Logs in an existing user and returns an authentication token.
 
 ---
 
+#### **GET /users/profile**
+
+Fetches the profile of the currently authenticated user.
+
+**Authentication:**
+
+- Requires JWT token (sent in `Authorization` header as `Bearer <token>` or as cookie).
+
+**Responses:**
+
+- ✅ **200 OK** → Returns `user` object of the logged-in user
+- ❌ **401 Unauthorized** → Missing or invalid token
+
+**Response Example (200):**
+
+```json
+{
+  "user": {
+    "_id": "65f1b0c2e4b8f1a2b3c4d5e6",
+    "fullName": {
+      "firstName": "John",
+      "lastName": "Doe"
+    },
+    "email": "johndoe@example.com"
+  }
+}
+```
+
+---
+
+#### **GET /users/logout**
+
+Logs out the currently authenticated user.
+
+**Authentication:**
+
+- Requires JWT token (sent in `Authorization` header as `Bearer <token>` or as cookie).
+
+**Responses:**
+
+- ✅ **200 OK** → User logged out successfully
+- ❌ **401 Unauthorized** → Missing or invalid token
+
+**Response Example (200):**
+
+```json
+{
+  "message": "Logged out successfully"
+}
+```
+
+---
+
 ## 📚 Note
 
 ⚠️ This is a **learning project** — not production-ready.
