@@ -1,13 +1,4 @@
-# Advance-Backend-Microservices-Ubar-Project
-
-<p align="center">
-  <img src="https://img.shields.io/badge/Status-Learning_Project-blue?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/Backend-Node.js-green?style=for-the-badge&logo=node.js" />
-  <img src="https://img.shields.io/badge/Frontend-React-blue?style=for-the-badge&logo=react" />
-  <img src="https://img.shields.io/badge/Database-MongoDB-brightgreen?style=for-the-badge&logo=mongodb" />
-  <img src="https://img.shields.io/badge/Architecture-Microservices-orange?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/Realtime-Socket.io-lightgrey?style=for-the-badge&logo=socket.io" />
-</p>
+# Advance-Backend-Microservices-Uber-Project
 
 🚖 **Advanced Uber-style Ride Hailing Backend**
 📌 Built with **MERN + Microservices** | Features: **Real-time, Scalable, GeoSpatial, Authentication**
@@ -158,6 +149,49 @@ Registers a new user into the system.
 
 ---
 
+#### **POST /users/login**
+
+Logs in an existing user and returns an authentication token.
+
+**Request Body:**
+
+```json
+{
+  "email": "johndoe@example.com",
+  "password": "password123"
+}
+```
+
+**Validations:**
+
+- `email` → must be a valid email address
+- `password` → minimum 6 characters required
+
+**Responses:**
+
+- ✅ **200 OK** → Returns `token` and `user` object
+- ❌ **400 Bad Request** → Validation errors
+- ❌ **401 Unauthorized** → Invalid email or password
+- ❌ **500 Internal Server Error** → Server issues
+
+**Response Example (200):**
+
+```json
+{
+  "token": "<jwt_token>",
+  "user": {
+    "_id": "65f1b0c2e4b8f1a2b3c4d5e6",
+    "fullName": {
+      "firstName": "John",
+      "lastName": "Doe"
+    },
+    "email": "johndoe@example.com"
+  }
+}
+```
+
+---
+
 ## 📚 Note
 
 ⚠️ This is a **learning project** — not production-ready.
@@ -166,4 +200,3 @@ The goal is to **practice MERN + Microservices** and simulate how a real ride-ha
 ---
 
 ✨ _Built with passion for learning & backend mastery._ 🚀
-   
