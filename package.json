@@ -1,0 +1,17 @@
+{
+  "name": "advance-backend-microservices-uber-project",
+  "version": "1.0.0",
+  "description": "<p align=\"center\">\r   <img src=\"https://img.shields.io/badge/Status-Learning_Project-blue?style=for-the-badge\" />\r   <img src=\"https://img.shields.io/badge/Backend-Node.js-green?style=for-the-badge&logo=node.js\" />\r   <img src=\"https://img.shields.io/badge/Frontend-React-blue?style=for-the-badge&logo=react\" />\r   <img src=\"https://img.shields.io/badge/Database-MongoDB-brightgreen?style=for-the-badge&logo=mongodb\" />\r   <img src=\"https://img.shields.io/badge/Architecture-Microservices-orange?style=for-the-badge\" />\r   <img src=\"https://img.shields.io/badge/Realtime-Socket.io-lightgrey?style=for-the-badge&logo=socket.io\" />\r </p>",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0"
+  }
+}
