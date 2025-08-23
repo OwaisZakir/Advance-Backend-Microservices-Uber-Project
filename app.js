@@ -9,6 +9,7 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors"); // Enable CORS
 const connectDB = require("./db"); // MongoDB connection utility
 const userRoutes = require("./routes/user.routes"); // User routes
+const captainRoutes = require("./routes/captain.routes"); // Captain routes
 
 // ====================================================
 //              🚀 Initialize Express App
@@ -35,7 +36,8 @@ app.get("/", (req, res) => {
   res.send("Hello World! 🚀 Backend is running...");
 });
 
-app.use("/api/v1/users", userRoutes); // User-related routes
+app.use("/api/v1/user", userRoutes); // User-related routes
+app.use("/api/v1/captain", captainRoutes); // Captain-related routes
 // ====================================================
 //              📦 Export App
 // ====================================================

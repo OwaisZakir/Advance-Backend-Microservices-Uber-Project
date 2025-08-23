@@ -192,54 +192,67 @@ Logs in an existing user and returns an authentication token.
 
 ---
 
-#### **GET /users/profile**
+### **Captain Routes**
 
-Fetches the profile of the currently authenticated user.
+#### **POST /captain/register**
 
-**Authentication:**
+Registers a new captain (driver) into the system.
 
-- Requires JWT token (sent in `Authorization` header as `Bearer <token>` or as cookie).
-
-**Responses:**
-
-- ✅ **200 OK** → Returns `user` object of the logged-in user
-- ❌ **401 Unauthorized** → Missing or invalid token
-
-**Response Example (200):**
+**Request Body:**
 
 ```json
 {
-  "user": {
-    "_id": "65f1b0c2e4b8f1a2b3c4d5e6",
-    "fullName": {
-      "firstName": "John",
-      "lastName": "Doe"
-    },
-    "email": "johndoe@example.com"
+  "fullName": {
+    "firstName": "Ali",
+    "lastName": "Khan"
+  },
+  "email": "alikhan@example.com",
+  "password": "password123",
+  "vehicle": {
+    "vehicleType": "car",
+    "color": "black",
+    "plateNumber": "ABC-123",
+    "capacity": 4
   }
 }
 ```
 
----
+**Validations:**
 
-#### **GET /users/logout**
-
-Logs out the currently authenticated user.
-
-**Authentication:**
-
-- Requires JWT token (sent in `Authorization` header as `Bearer <token>` or as cookie).
+- `fullName.firstName` → minimum 3 characters required
+- `email` → must be a valid email address
+- `password` → minimum 6 characters required
+- `vehicle.color` → minimum 3 characters required
+- `vehicle.vehicleType` → must be one of `car`, `motorcycle`, `auto`
+- `vehicle.plateNumber` → minimum 3 characters required, must be unique
+- `vehicle.capacity` → minimum 1 seat required
 
 **Responses:**
 
-- ✅ **200 OK** → User logged out successfully
-- ❌ **401 Unauthorized** → Missing or invalid token
+- ✅ **201 Created** → Returns `token` and `captain` object
+- ❌ **400 Bad Request** → Validation errors / Captain already exists
+- ❌ **500 Internal Server Error** → Server issues
 
-**Response Example (200):**
+**Response Example (201):**
 
 ```json
 {
-  "message": "Logged out successfully"
+  "token": "<jwt_token>",
+  "captain": {
+    "_id": "65f1b0c2e4b8f1a2b3c4d5e6",
+    "fullName": {
+      "firstName": "Ali",
+      "lastName": "Khan"
+    },
+    "email": "alikhan@example.com",
+    "vehicle": {
+      "vehicleType": "car",
+      "color": "black",
+      "plateNumber": "ABC-123",
+      "capacity": 4
+    },
+    "status": "inactive"
+  }
 }
 ```
 
