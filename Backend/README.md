@@ -119,39 +119,15 @@ Registers a new user into the system.
 }
 ```
 
-**Validations:**
-
-- `fullName.firstName` → minimum 3 characters required
-- `email` → must be a valid email address
-- `password` → minimum 6 characters required
-
 **Responses:**
 
 - ✅ **201 Created** → Returns `token` and `user` object
 - ❌ **400 Bad Request** → Validation errors
 - ❌ **500 Internal Server Error** → Server issues
 
-**Response Example (201):**
-
-```json
-{
-  "token": "<jwt_token>",
-  "user": {
-    "_id": "65f1b0c2e4b8f1a2b3c4d5e6",
-    "fullName": {
-      "firstName": "John",
-      "lastName": "Doe"
-    },
-    "email": "johndoe@example.com"
-  }
-}
-```
-
----
-
 #### **POST /users/login**
 
-Logs in an existing user and returns an authentication token.
+Logs in an existing user.
 
 **Request Body:**
 
@@ -162,11 +138,6 @@ Logs in an existing user and returns an authentication token.
 }
 ```
 
-**Validations:**
-
-- `email` → must be a valid email address
-- `password` → minimum 6 characters required
-
 **Responses:**
 
 - ✅ **200 OK** → Returns `token` and `user` object
@@ -174,74 +145,94 @@ Logs in an existing user and returns an authentication token.
 - ❌ **401 Unauthorized** → Invalid email or password
 - ❌ **500 Internal Server Error** → Server issues
 
-**Response Example (200):**
-
-```json
-{
-  "token": "<jwt_token>",
-  "user": {
-    "_id": "65f1b0c2e4b8f1a2b3c4d5e6",
-    "fullName": {
-      "firstName": "John",
-      "lastName": "Doe"
-    },
-    "email": "johndoe@example.com"
-  }
-}
-```
-
----
-
 #### **GET /users/profile**
 
-Fetches the profile of the currently authenticated user.
-
-**Authentication:**
-
-- Requires JWT token (sent in `Authorization` header as `Bearer <token>` or as cookie).
+Fetches the authenticated user's profile.
 
 **Responses:**
 
-- ✅ **200 OK** → Returns `user` object of the logged-in user
-- ❌ **401 Unauthorized** → Missing or invalid token
-
-**Response Example (200):**
-
-```json
-{
-  "user": {
-    "_id": "65f1b0c2e4b8f1a2b3c4d5e6",
-    "fullName": {
-      "firstName": "John",
-      "lastName": "Doe"
-    },
-    "email": "johndoe@example.com"
-  }
-}
-```
-
----
+- ✅ **200 OK** → Returns `user` object
+- ❌ **401 Unauthorized** → Invalid or missing token
 
 #### **GET /users/logout**
 
-Logs out the currently authenticated user.
-
-**Authentication:**
-
-- Requires JWT token (sent in `Authorization` header as `Bearer <token>` or as cookie).
+Logs out the authenticated user and blacklists the token.
 
 **Responses:**
 
 - ✅ **200 OK** → User logged out successfully
-- ❌ **401 Unauthorized** → Missing or invalid token
+- ❌ **401 Unauthorized** → Invalid or missing token
 
-**Response Example (200):**
+---
+
+### **Captain Routes**
+
+#### **POST /captain/register**
+
+Registers a new captain (driver).
+
+**Request Body:**
 
 ```json
 {
-  "message": "Logged out successfully"
+  "fullName": {
+    "firstName": "Ali",
+    "lastName": "Khan"
+  },
+  "email": "alikhan@example.com",
+  "password": "password123",
+  "vehicle": {
+    "vehicleType": "car",
+    "color": "black",
+    "plateNumber": "ABC-123",
+    "capacity": 4
+  }
 }
 ```
+
+**Responses:**
+
+- ✅ **201 Created** → Returns `token` and `captain` object
+- ❌ **400 Bad Request** → Validation errors / Captain already exists
+- ❌ **500 Internal Server Error** → Server issues
+
+#### **POST /captain/login**
+
+Logs in an existing captain.
+
+**Request Body:**
+
+```json
+{
+  "email": "alikhan@example.com",
+  "password": "password123"
+}
+```
+
+**Responses:**
+
+- ✅ **200 OK** → Returns `token` and `captain` object
+- ❌ **400 Bad Request** → Validation errors
+- ❌ **401 Unauthorized** → Invalid email or password
+- ❌ **500 Internal Server Error** → Server issues
+
+#### **GET /captain/profile**
+
+Fetches the authenticated captain's profile.
+
+**Responses:**
+
+- ✅ **200 OK** → Returns `captain` object
+- ❌ **401 Unauthorized** → Invalid or missing token
+
+#### **GET /captain/logout**
+
+Logs out the authenticated captain and blacklists the token.
+
+**Responses:**
+
+- ✅ **200 OK** → Captain logged out successfully
+- ❌ **401 Unauthorized** → Invalid or missing token
 
 ---
 
