@@ -1,4 +1,4 @@
-# Advance-Backend-Microservices-Uber-Project
+# Microservices-Uber-Backend-Project
 
 🚖 **Advanced Uber-style Ride Hailing Backend**
 📌 Built with **MERN + Microservices** | Features: **Real-time, Scalable, GeoSpatial, Authentication**
